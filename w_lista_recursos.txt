@@ -1,0 +1,104 @@
+npm
+node.js
+ejs
+  - permite criar layouts
+  - evita de repetir o mesmo codigo para TODAS AS paginas
+git
+mongoDB
+moongose
+MySQL
+
+// COMMANDOS
+Pacotes npm
+npm init
+
+npm i express ejs express-ejs-layouts
+  express (servidor)
+  ejs (template)
+  express-ejs-layouts (permite criar um layout para os arquivos HTML)
+
+npm i --save-dev nodemon
+  -dev developer dependency
+  nodemon permite que o sistema reinicialize toda vez que ocorrer mudança nos códigos
+
+// ATUALIZAR package.json
+  "main": "server.js"
+
+  scripts:
+    "start": "node server.js",
+    "devStart": "nodemon server.js"
+
+// CRIAR ARQUIVO server.js
+const express = require('express')
+const app = express()
+const expressLayouts = require('express-ejs-layouts')
+
+app.set('view engine', 'ejs')
+app.set('views', __dirname + '/views')
+app.set('layout', 'layouts/layout')
+app.use(expressLayouts)
+app.use(express.static('public'))
+
+// CRIAR PASTAS
+  views
+  public
+
+// COMANDO PARA INICIALIZAR SERVIDOR
+npm run devStart
+
+// CRIAR ROTAS
+  criar pasta: routes
+  criar index.js (views)
+    const express = require('express')
+    const router = express.Router()
+
+    router.get('/', (req, res) => {
+      res.send('funcionando')
+    })
+
+    module.exports = router
+  
+  adicionar server.js
+    // VARIAVEIS DO SISTEMA
+    const indexRouter = require('./routes/index')
+
+    // Rotas
+      app.use('/', indexRouter)
+
+// CRIAR LAYOUTS
+  criar pasta dentro de views: layouts
+  criar layout.ejs
+    !
+    <%- body %>
+
+// INTEGRAR BANCO DE DADOS
+  mongoDB
+    npm i mongoose
+
+  adicionar server.js
+    // CONFIGURACOES  
+      const mongoose = require('mongoose')
+      mongoose.connect(process.env.DATABASE_URL, { 
+        useNewUrlParser: true,
+        useUnifiedTopology: true})
+      const db = mongoose.connection
+      db.on('error', error => console.error(error))
+      db.once('open', () => console.log('Connected to Mongoose'))
+
+  variaveis de ambiente comando:
+    npm i --save-dev dotenv
+
+    criar .env
+      DATABASE_URL=mongodb://localhost/database_name
+
+// CRIAR MODELOS
+  criar pasta: models
+
+
+// GIT
+  comando
+    git init
+
+  criar .gitignore
+    .env
+    node_modules
