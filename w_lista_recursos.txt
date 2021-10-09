@@ -102,3 +102,46 @@ npm run devStart
   criar .gitignore
     .env
     node_modules
+
+  git add -n .
+  git add .
+
+  se adicionar coisa errada
+    git rm -r --cached .
+  
+  copiar do github da pasta desejada: git@github.com:marcioUfrj/tcc_marcio.git
+    git remote add origin git@github.com:marcioUfrj/tcc_marcio.git
+
+  git push -u origin main
+
+// HEROKU
+baixar e instalar heroku cli (se ainda n estiver instalado no pc)
+
+If you haven't already, log in to your Heroku account and follow the prompts to create a new SSH public key.
+$ heroku login
+
+Initialize a git repository in a new or existing directory
+$ heroku git:remote -a tccmarcio
+
+If you want to deploy code to Heroku from a non-main branch of your local repository (for example, testbranch), use the following syntax to ensure it is pushed to the remote’s main branch:
+$ git push heroku testbranchname:main
+
+To reset/purge an app’s Heroku Git repository, use the heroku-repo CLI plugin:
+heroku plugins:install heroku-repo
+heroku repo:reset --app appname
+
+//ATLAS mongoDB
+connect
+  create new user
+    user
+    senha aleatoria (copiar para n perder)
+  
+  choose a connection method
+    connect your application
+      COPY connection_string_only
+
+colar connection_string_only na variavel de sistema no heroku
+  alterar <password> para o pass gerado anteriormente
+
+// BODY-PARSER
+npm i body-parser
